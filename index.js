@@ -1,8 +1,9 @@
 // Add a note to localstorage
 let addBtn = document.getElementById("addBtn");
+let addTxt = document.getElementById("addTxt");
 show();
 addBtn.addEventListener('click', function(e) {
-    let addTxt = document.getElementById("addTxt");
+    
     let notes = localStorage.getItem("notes");
     let noteObj;
     if (notes == null) {
@@ -10,15 +11,29 @@ addBtn.addEventListener('click', function(e) {
     } else {
         noteObj = JSON.parse(notes);
     }
-    if(addText.value!="")
-    { 
+	if(addTxt.value==""){
+    addBtn.disabled = true;}
+	else{
+		addBtn.disabled=false;
     noteObj.push(addTxt.value);
     localStorage.setItem("notes", JSON.stringify(noteObj));
     addTxt.value = " ";
     show();
-    }
+	addBtn.disabled = true;
+	}
+
 
 });
+
+// disable button if note's content is empty
+addTxt.addEventListener('change',function(e){
+	if(addTxt.value=="")
+	addBtn.disabled=true;
+    else
+	addBtn.disabled=false; 
+}
+);
+
 
 // Function to show notes from the localstorage
 function show() {
