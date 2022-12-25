@@ -10,10 +10,13 @@ addBtn.addEventListener('click', function(e) {
     } else {
         noteObj = JSON.parse(notes);
     }
+    if(addText.value!="")
+    { 
     noteObj.push(addTxt.value);
     localStorage.setItem("notes", JSON.stringify(noteObj));
     addTxt.value = " ";
     show();
+    }
 
 });
 
